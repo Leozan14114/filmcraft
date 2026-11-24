@@ -1,0 +1,11 @@
+services:
+  filmcraft-relay:
+    build:
+      context: .
+      dockerfile: Dockerfile.relay
+    image: filmcraft-relay:latest
+    container_name: filmcraft-relay
+    restart: unless-stopped
+    ports:
+      - "9001:9001/tcp"
+    command: ["0.0.0.0:9001"]

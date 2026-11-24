@@ -1,0 +1,30 @@
+[package]
+name = "filmcraft-collab"
+description = "FilmCraft collaboration: wire protocol, three-way merge, the relay's session sequencer and the client sync state machine"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[lints]
+workspace = true
+
+[lib]
+name = "filmcraft_collab"
+path = "src/lib.rs"
+
+[features]
+default = []
+# WebSocket transport (relay server and client connection). Native only: the web build leaves it off.
+net = ["dep:tokio", "dep:tokio-tungstenite", "dep:futures-util"]
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+log = { workspace = true }
+futures-util = { version = "0.3", optional = true }
+tokio = { version = "1", optional = true, features = ["rt", "rt-multi-thread", "net", "time", "sync", "macros"] }
+tokio-tungstenite = { version = "0.28", optional = true }
+
+[dev-dependencies]
+tokio = { version = "1", features = ["rt", "rt-multi-thread", "net", "time", "sync", "macros"] }
